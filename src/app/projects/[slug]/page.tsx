@@ -9,8 +9,11 @@ import { getProject, projects, sectionOrder } from "@/data/projects";
 
 type Params = { params: Promise<{ slug: string }> };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  // Projects without `sections` (e.g. M&A Valuation) have their own route folder.
+  return projects.filter((p) => p.sections).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
@@ -31,7 +34,8 @@ const statusNotes = {
 export default async function ProjectPage({ params }: Params) {
   const { slug } = await params;
   const project = getProject(slug);
-  if (!project) notFound();
+  if (!project?.sections) notFound();
+  const sections = project.sections;
 
   const idx = projects.findIndex((p) => p.slug === slug);
   const next = projects[(idx + 1) % projects.length];
@@ -76,7 +80,7 @@ export default async function ProjectPage({ params }: Params) {
               <p className="text-xs tracking-[0.2em] text-brass uppercase">Contents</p>
               <ol className="mt-4 space-y-3 border-l border-sand-200">
                 {sectionOrder.map((s) => {
-                  const pending = project.sections[s.key].state === "pending";
+                  const pending = sections[s.key].state === "pending";
                   return (
                     <li key={s.key}>
                       <a
@@ -116,7 +120,7 @@ export default async function ProjectPage({ params }: Params) {
                 id={s.key}
                 index={i + 1}
                 title={s.title}
-                section={project.sections[s.key]}
+                section={sections[s.key]}
               />
             ))}
           </div>

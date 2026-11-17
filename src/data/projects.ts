@@ -32,7 +32,8 @@ export type Project = {
   summary: string;
   topics: string[];
   tools?: string[];
-  sections: Record<SectionKey, ProjectSection>;
+  /** Five-section detail page. Omit for projects that have their own pages. */
+  sections?: Record<SectionKey, ProjectSection>;
 };
 
 export const sectionOrder: { key: SectionKey; title: string }[] = [
@@ -45,57 +46,25 @@ export const sectionOrder: { key: SectionKey; title: string }[] = [
 
 export const projects: Project[] = [
   {
-    slug: "ma-valuation-airthread",
+    // Project 01 is a full section with its own pages in src/app/projects/ma-valuation/.
+    // Its content lives in src/data/valuation.ts, so it has no `sections` here.
+    slug: "ma-valuation",
     number: "01",
     category: "M&A Valuation",
-    title: "AirThread Connections Acquisition",
-    subtitle: "Valuation case study",
+    title: "Enterprise Valuation and the AirThread Acquisition",
     status: "In Progress",
     summary:
-      "A valuation of AirThread Connections as an acquisition target, built around discounted cash flow analysis, comparable companies, and a cost of capital that reflects the target's capital structure.",
+      "Core enterprise valuation frameworks (APV, WACC, Flow to Equity) and terminal value methods, applied to valuing AirThread Connections as an acquisition target.",
     topics: [
+      "APV",
+      "WACC",
+      "Flow to Equity",
+      "Terminal value",
       "DCF valuation",
       "Comparable company analysis",
-      "WACC",
       "Capital structure",
       "Enterprise value",
     ],
-    sections: {
-      businessProblem: {
-        state: "written",
-        label: "Case context",
-        paragraphs: [
-          "The AirThread Connections case asks what a potential acquirer should be willing to pay for AirThread, a regional wireless provider. The acquirer needs a defensible estimate of the target's value before deciding whether, and at what price, to move forward.",
-          "The central questions are how much the business is worth on a standalone basis, how its capital structure affects the appropriate discount rate, and how an intrinsic valuation compares with how the market values similar companies.",
-        ],
-      },
-      methodology: {
-        state: "written",
-        label: "Planned approach",
-        paragraphs: [
-          "The analysis is structured around the standard tools of acquisition valuation:",
-        ],
-        bullets: [
-          "Discounted cash flow (DCF): project free cash flows over the forecast horizon and estimate a terminal value.",
-          "Weighted average cost of capital (WACC): estimate the cost of equity and cost of debt, and reflect the target capital structure.",
-          "Capital structure: consider how leverage affects beta and the discount rate.",
-          "Comparable company analysis: benchmark the target against trading multiples of similar companies.",
-          "Enterprise value: reconcile the DCF and multiples-based views into a value range.",
-        ],
-      },
-      analysis: {
-        state: "pending",
-        note: "This analysis is in progress. Model outputs will be added here once the work is complete and checked.",
-      },
-      findings: {
-        state: "pending",
-        note: "No findings yet. Results will be published only after the valuation is finished.",
-      },
-      implications: {
-        state: "pending",
-        note: "Business implications will be written once the findings are final.",
-      },
-    },
   },
   {
     slug: "fpa-modeling",

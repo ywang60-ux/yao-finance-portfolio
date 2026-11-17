@@ -42,3 +42,6 @@ next-env.d.ts
 
 # python
 /.venv/
+
+# local Claude Code settings (contain machine-specific paths)
+/.claude/

@@ -51,10 +51,10 @@ export const projects: Project[] = [
     slug: "ma-valuation",
     number: "01",
     category: "M&A Valuation",
-    title: "Enterprise Valuation and the AirThread Acquisition",
-    status: "In Progress",
+    title: "Enterprise Valuation: Frameworks and Case Studies",
+    status: "Completed",
     summary:
-      "Core enterprise valuation frameworks (APV, WACC, Flow to Equity) and terminal value methods, applied to valuing AirThread Connections as an acquisition target.",
+      "Core enterprise valuation frameworks (APV, WACC, Flow to Equity) and terminal value methods, applied in case studies: Flash Memory's investment and financing decision and Ferrari's 2015 IPO.",
     topics: [
       "APV",
       "WACC",
@@ -64,6 +64,9 @@ export const projects: Project[] = [
       "Comparable company analysis",
       "Capital structure",
       "Enterprise value",
+      "NPV / IRR",
+      "Financing decisions",
+      "IPO valuation",
     ],
   },
   {
@@ -106,37 +109,17 @@ export const projects: Project[] = [
     },
   },
   {
+    // Project 03 has its own page with an interactive dashboard in
+    // src/app/projects/financial-data-analytics/. Content: src/data/promotionAnalysis.ts.
     slug: "financial-data-analytics",
     number: "03",
     category: "Financial Data Analytics",
-    title: "Financial Data and Dashboards",
-    status: "Planned",
+    title: "Multinational Promotion Analysis",
+    status: "Completed",
     summary:
-      "A planned analytics project using SQL, Python, and Power BI to prepare financial data and present it through clear dashboards.",
-    topics: ["SQL", "Python", "Power BI", "Financial dashboards"],
-    tools: ["SQL", "Python", "Power BI"],
-    sections: {
-      businessProblem: {
-        state: "written",
-        label: "Planned scope",
-        paragraphs: [
-          "Financial data is often spread across sources and hard to read quickly. This project will focus on turning raw financial data into reliable, decision-ready reporting.",
-        ],
-      },
-      methodology: {
-        state: "written",
-        label: "Planned approach",
-        paragraphs: ["The intended scope includes:"],
-        bullets: [
-          "SQL for querying and structuring financial data.",
-          "Python for cleaning, transformation, and analysis.",
-          "Power BI for interactive financial dashboards.",
-        ],
-      },
-      analysis: { state: "pending", note: "Not started. This project is planned." },
-      findings: { state: "pending", note: "Not started. This project is planned." },
-      implications: { state: "pending", note: "Not started. This project is planned." },
-    },
+      "A Power BI promotion analysis of 3.4 million retail sales records across three continents, rebuilt here as an interactive dashboard that visitors can filter by region, product, and year.",
+    topics: ["Power BI", "DAX", "Star schema data model", "Interactive dashboards", "Promotion analysis"],
+    tools: ["Power BI", "DAX", "Python"],
   },
   {
     slug: "strategic-finance",

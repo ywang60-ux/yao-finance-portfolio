@@ -1,12 +1,9 @@
 /**
  * M&A Valuation content (Project 01): valuation frameworks, terminal value
- * methods, and the AirThread acquisition case study.
+ * methods, and the list of case studies.
  *
  * Formulas are written in LaTeX (rendered with KaTeX) and are standard
  * textbook definitions. They contain no company data or assumptions.
- *
- * The AirThread case study data at the bottom of this file starts empty
- * (`null`). Fill values in only from your own Excel model.
  */
 
 const tex = String.raw;
@@ -299,11 +296,31 @@ export const terminalValueMethods: MethodPage[] = [
 /* Section navigation                                                  */
 /* ------------------------------------------------------------------ */
 
-export const caseStudies = [
+export const caseStudies: {
+  slug: string;
+  short: string;
+  kicker: string;
+  summary: string;
+  status: "In Progress" | "Completed";
+  href: string;
+}[] = [
   {
-    slug: "airthread",
-    short: "AirThread Acquisition Valuation",
-    href: `${valuationBase}/case-study/airthread`,
+    slug: "flash-memory",
+    short: "Flash Memory: Investment and Financing",
+    kicker: "Capital Budgeting · Financing",
+    summary:
+      "NPV of a new product line, a comparable-company WACC, and debt versus equity financing under a binding credit limit.",
+    status: "Completed",
+    href: `${valuationBase}/case-study/flash-memory`,
+  },
+  {
+    slug: "ferrari-ipo",
+    short: "Ferrari: The 2015 IPO",
+    kicker: "IPO Valuation",
+    summary:
+      "Pricing Ferrari's IPO with luxury versus auto multiples and a DCF tested under exit-multiple and perpetuity terminal values.",
+    status: "Completed",
+    href: `${valuationBase}/case-study/ferrari-ipo`,
   },
 ];
 
@@ -323,7 +340,7 @@ export const valuationNav = [
     })),
   },
   {
-    label: "Case Study",
+    label: "Case Studies",
     items: caseStudies.map((c) => ({ label: c.short, href: c.href })),
   },
 ];
@@ -334,77 +351,3 @@ export function methodHref(m: MethodPage) {
 
 /** Enterprise value to equity value bridge (shown on the overview page). */
 export const equityBridgeLatex = tex`\text{Equity Value} = \text{Enterprise Value} - \text{Debt} + \text{Cash} - \text{Preferred Stock} - \text{Noncontrolling Interest}`;
-
-/* ------------------------------------------------------------------ */
-/* AirThread case study                                                */
-/* ------------------------------------------------------------------ */
-
-/**
- * Fill these in from your own Excel model.
- * - `value: null` displays as "Pending".
- * - To offer the Excel file for download, put it in /public/models/ and set
- *   excelModel.href to e.g. "/models/airthread-valuation.xlsx".
- */
-export const airthread = {
-  status: "In Progress" as const,
-
-  /** Business Problem. */
-  overview: [
-    "The AirThread Connections case asks what a potential acquirer should be willing to pay for AirThread, a regional wireless provider. The acquirer needs a defensible estimate of the target's value before deciding whether, and at what price, to move forward.",
-    "The central questions are how much the business is worth on a standalone basis, how its capital structure affects the appropriate discount rate, and how an intrinsic valuation compares with how the market values similar companies.",
-  ],
-
-  /** Methodology (planned approach). */
-  methodology: {
-    intro:
-      "The case applies the frameworks and terminal value methods in this project, comparing results across WACC, APV, and Flow to Equity:",
-    bullets: [
-      "Discounted cash flow (DCF): project free cash flows over the forecast horizon and estimate a terminal value.",
-      "Weighted average cost of capital (WACC): estimate the cost of equity and cost of debt, and reflect the target capital structure.",
-      "Capital structure: consider how leverage affects beta and the discount rate.",
-      "Comparable company analysis: benchmark the target against trading multiples of similar companies.",
-      "Enterprise value: reconcile the DCF and multiples-based views into a value range.",
-    ],
-  },
-
-  excelModel: {
-    href: null as string | null,
-    fileName: null as string | null,
-    description: null as string | null,
-  },
-
-  /** Labels of the assumptions to document. Values stay null until taken from the model. */
-  assumptions: [
-    { label: "Forecast horizon", value: null as string | null, source: null as string | null },
-    { label: "Risk-free rate", value: null, source: null },
-    { label: "Market risk premium", value: null, source: null },
-    { label: "Unlevered / levered beta", value: null, source: null },
-    { label: "Pre-tax cost of debt", value: null, source: null },
-    { label: "Tax rate", value: null, source: null },
-    { label: "Target capital structure (D/V)", value: null, source: null },
-    { label: "Terminal growth rate", value: null, source: null },
-  ],
-
-  /** Valuation results by framework. */
-  outputs: [
-    { method: "WACC", href: `${valuationBase}/frameworks/wacc`, enterpriseValue: null as string | null, equityValue: null as string | null },
-    { method: "APV", href: `${valuationBase}/frameworks/apv`, enterpriseValue: null, equityValue: null },
-    { method: "Flow to Equity", href: `${valuationBase}/frameworks/fte`, enterpriseValue: null, equityValue: null },
-  ],
-
-  /** Terminal value results by method. */
-  terminalValues: [
-    { method: "Growing Perpetuity", href: `${valuationBase}/terminal-value/growing-perpetuity`, value: null as string | null },
-    { method: "Liquidation Value", href: `${valuationBase}/terminal-value/liquidation-value`, value: null },
-    { method: "Multiples", href: `${valuationBase}/terminal-value/multiples`, value: null },
-  ],
-
-  /** Acquisition analysis write-up (part of Analysis). Leave empty until complete. */
-  acquisitionAnalysis: [] as string[],
-
-  /** Findings. Leave empty until complete. */
-  findings: [] as string[],
-
-  /** Business implications. Leave empty until complete. */
-  implications: [] as string[],
-};

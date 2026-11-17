@@ -15,7 +15,7 @@ const dots: Record<ProjectStatus, string> = {
 export default function StatusBadge({ status }: { status: ProjectStatus }) {
   return (
     <span
-      className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[0.68rem] font-semibold tracking-[0.16em] uppercase ${styles[status]}`}
+      className={`inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-3 py-1 text-[0.68rem] font-semibold tracking-[0.16em] uppercase ${styles[status]}`}
     >
       <span className={`h-1.5 w-1.5 rounded-full ${dots[status]}`} aria-hidden />
       {status}

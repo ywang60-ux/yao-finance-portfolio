@@ -17,6 +17,10 @@
   --color-brass: #a8875a;
   --color-brass-light: #c9ac80;
 
+  /* Chart poles (validated: lightness, chroma, CVD, contrast all pass). */
+  --color-chart-up: #2f5ea8;
+  --color-chart-down: #b8812f;
+
 }
 
 /* `inline` so the utilities read the next/font variables set on <body>. */

@@ -6,7 +6,6 @@ import Formula from "@/components/valuation/Formula";
 import ValuationShell, { Block } from "@/components/valuation/ValuationShell";
 import { getProject } from "@/data/projects";
 import {
-  airthread,
   caseStudies,
   equityBridgeLatex,
   frameworks,
@@ -64,7 +63,7 @@ export default function MAValuationPage() {
         </div>
       </Block>
 
-      <Block title="3. Case Study" id="case-study">
+      <Block title="3. Case Studies" id="case-studies">
         <div className="grid gap-4">
           {caseStudies.map((c) => (
             <Link
@@ -73,11 +72,12 @@ export default function MAValuationPage() {
               className="group flex flex-col gap-4 border border-sand-200 bg-white p-8 transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-20px_rgba(11,26,51,0.35)] sm:flex-row sm:items-center sm:justify-between"
             >
               <div>
-                <p className="text-xs tracking-[0.2em] text-brass uppercase">M&amp;A Case Study</p>
+                <p className="text-xs tracking-[0.2em] text-brass uppercase">{c.kicker}</p>
                 <p className="mt-2 font-serif text-3xl text-navy-900">{c.short}</p>
+                <p className="mt-2 max-w-xl text-sm leading-relaxed text-stone-600">{c.summary}</p>
               </div>
               <div className="flex items-center gap-6">
-                <StatusBadge status={airthread.status} />
+                <StatusBadge status={c.status} />
                 <span className="text-xl text-navy-900 transition-transform group-hover:translate-x-1" aria-hidden>
                   →
                 </span>

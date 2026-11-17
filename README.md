@@ -110,4 +110,31 @@ python3 -m venv .venv && .venv/bin/pip install pbixray
 
 ## Deployment
 
-The site is not deployed. When you are ready, it can be hosted on any Next.js host (for example Vercel) by connecting this repository.
+This repository is the single source of truth. It deploys to two places:
+
+| Target | URL | How |
+|---|---|---|
+| Vercel | your Vercel project URL | Vercel's default `next build` (with redirects) |
+| GitHub Pages | https://ywang60-ux.github.io | `.github/workflows/deploy-github-pages.yml` |
+
+### GitHub Pages (static export)
+
+Setting `GITHUB_PAGES=true` switches `next.config.ts` to a static HTML export in `out/`
+(`output: "export"`, `trailingSlash: true`). Without that variable the build is unchanged,
+so Vercel is not affected. The old-URL redirects only exist on Vercel, because static
+export cannot run redirects.
+
+On every push to `main` (or a manual run from the Actions tab), the workflow builds the
+export, adds `.nojekyll` (so GitHub Pages keeps the `_next/` folder), and pushes `out/` to
+the `main` branch of `ywang60-ux/ywang60-ux.github.io`. That repository only holds build
+output; never edit it by hand, because each deploy replaces its contents.
+
+It needs one repository secret, `PAGES_DEPLOY_TOKEN`: a fine-grained personal access
+token with **Contents: Read and write** on `ywang60-ux/ywang60-ux.github.io` only.
+
+To preview the static export locally:
+
+```bash
+GITHUB_PAGES=true npm run build
+npx serve out
+```

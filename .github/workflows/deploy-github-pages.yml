@@ -1,0 +1,101 @@
+# Builds a static export of this site and publishes it to the separate
+# GitHub Pages repository ywang60-ux/ywang60-ux.github.io
+# (served at https://ywang60-ux.github.io).
+#
+# This repository stays the single source of truth. The Pages repository only
+# receives the generated out/ folder. The Vercel deployment is unaffected:
+# Vercel runs a normal `next build` without GITHUB_PAGES.
+#
+# Requires the repository secret PAGES_DEPLOY_TOKEN: a fine-grained personal
+# access token with "Contents: Read and write" on ywang60-ux/ywang60-ux.github.io only.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# The build only needs to read this repository. Writing to the Pages
+# repository uses PAGES_DEPLOY_TOKEN, not GITHUB_TOKEN.
+permissions:
+  contents: read
+
+# Never run two deployments at once; finish the running one before the next.
+concurrency:
+  group: github-pages-deploy
+  cancel-in-progress: false
+
+env:
+  TARGET_REPO: ywang60-ux/ywang60-ux.github.io
+  TARGET_BRANCH: main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export
+        run: npm run build
+        env:
+          GITHUB_PAGES: "true"
+
+      - name: Prepare and verify output
+        run: |
+          # Without .nojekyll, GitHub Pages runs Jekyll, which drops the _next/ folder.
+          touch out/.nojekyll
+          for f in index.html 404.html .nojekyll data/promotion-dashboard.json; do
+            test -e "out/$f" || { echo "::error::Missing out/$f"; exit 1; }
+          done
+          test -d out/_next || { echo "::error::Missing out/_next"; exit 1; }
+          echo "Pages: $(find out -name index.html | wc -l)  Size: $(du -sh out | cut -f1)"
+
+      - name: Publish to ${{ env.TARGET_REPO }}
+        env:
+          PAGES_DEPLOY_TOKEN: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${PAGES_DEPLOY_TOKEN}" ]; then
+            echo "::error::Repository secret PAGES_DEPLOY_TOKEN is not set."
+            exit 1
+          fi
+          AUTH_HEADER="AUTHORIZATION: basic $(printf 'x-access-token:%s' "${PAGES_DEPLOY_TOKEN}" | base64 -w0)"
+          echo "::add-mask::${AUTH_HEADER}"
+
+          # Clone the Pages repository (public, so no credentials are needed to read it).
+          git clone --depth 1 "https://github.com/${TARGET_REPO}.git" publish
+          cd publish
+          git checkout -B "${TARGET_BRANCH}"
+
+          # Replace everything except git metadata with the new build.
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -R ../out/. .
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+            exit 0
+          fi
+          git commit -q -m "Deploy ${GITHUB_REPOSITORY}@${GITHUB_SHA::7}"
+
+          # The token is passed only as an HTTP header for this one command; it is
+          # never written to the remote URL or to any file.
+          git -c http.https://github.com/.extraheader="${AUTH_HEADER}" \
+            push "https://github.com/${TARGET_REPO}.git" "HEAD:refs/heads/${TARGET_BRANCH}"
+          echo "Published ${GITHUB_SHA::7} to https://github.com/${TARGET_REPO} (${TARGET_BRANCH})"

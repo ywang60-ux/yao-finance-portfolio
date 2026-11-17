@@ -70,43 +70,17 @@ export const projects: Project[] = [
     ],
   },
   {
+    // Project 02 has its own page with interactive models in
+    // src/app/projects/fpa-modeling/. Content: src/data/fpaModeling.ts.
     slug: "fpa-modeling",
     number: "02",
     category: "FP&A Modeling",
-    title: "FP&A Forecasting and Variance Model",
-    status: "Planned",
+    title: "FP&A Budgeting and Forecasting Model",
+    status: "In Progress",
     summary:
-      "A planned FP&A model covering revenue and expense forecasting, budget versus actual comparison, variance analysis, and scenario planning.",
-    topics: [
-      "Financial forecasting",
-      "Revenue and expense modeling",
-      "Budget vs. actual",
-      "Variance analysis",
-      "Scenario planning",
-    ],
-    sections: {
-      businessProblem: {
-        state: "written",
-        label: "Planned scope",
-        paragraphs: [
-          "Finance teams need forecasts that are realistic, easy to update, and useful for explaining why actual results differ from plan. This project will focus on building that kind of planning model.",
-        ],
-      },
-      methodology: {
-        state: "written",
-        label: "Planned approach",
-        paragraphs: ["The intended scope includes:"],
-        bullets: [
-          "Revenue and expense forecasting driven by clear assumptions.",
-          "A budget versus actual comparison.",
-          "Variance analysis that separates the main drivers of differences.",
-          "Scenario planning to test alternative assumptions.",
-        ],
-      },
-      analysis: { state: "pending", note: "Not started. This project is planned." },
-      findings: { state: "pending", note: "Not started. This project is planned." },
-      implications: { state: "pending", note: "Not started. This project is planned." },
-    },
+      "A monthly, driver-based budget and forecast for a professional services firm, covering revenue and receivables, headcount, contractor, capex, and debt analysis, financial statement aggregation, and budget-versus-forecast dashboards, with interactive models of the revenue, cost, and cash logic.",
+    topics: ["Revenue & receivables", "Headcount planning", "Contractor analysis", "Capex & depreciation", "Revolving credit line", "Statement aggregation", "Budget vs. forecast dashboards"],
+    tools: ["Excel"],
   },
   {
     // Project 03 has its own page with an interactive dashboard in

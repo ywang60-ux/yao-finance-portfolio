@@ -83,7 +83,7 @@ export const ferrari = {
     },
     {
       label: "Price per share",
-      latex: tex`P_{\$} = \frac{EV - \text{Debt}}{189\text{M shares}} \times 1.1375\ \tfrac{\$}{€}`,
+      latex: tex`P_{\$} = \frac{EV - \text{Debt}}{189\text{M shares}} \times 1.1375\ \$/\text{EUR}`,
       note: "The DCF bridge also adds investments and deferred tax assets and subtracts other liabilities (June 2015 balance sheet).",
     },
   ],

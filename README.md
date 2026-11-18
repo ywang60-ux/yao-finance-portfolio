@@ -73,7 +73,7 @@ Project 01 has its own set of pages instead of the standard five-section project
 | Page | Address |
 |---|---|
 | Project overview | `/projects/ma-valuation` |
-| Valuation Frameworks | `/projects/ma-valuation/frameworks/apv`, `/wacc`, `/fte` |
+| Valuation Methods | `/projects/ma-valuation/frameworks/apv`, `/wacc`, `/fte` |
 | Terminal Value | `/projects/ma-valuation/terminal-value/growing-perpetuity`, `/liquidation-value`, `/multiples` |
 | Case Studies | `/projects/ma-valuation/case-study/flash-memory`, `/ferrari-ipo` |
 

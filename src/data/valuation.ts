@@ -330,7 +330,7 @@ export const valuationNav = [
     items: [{ label: "Structure, Tax & Valuation", href: `${valuationBase}/acquisition-framework` }],
   },
   {
-    label: "Valuation Frameworks",
+    label: "Valuation Methods",
     items: frameworks.map((m) => ({
       label: `${m.title} (${m.short})`,
       href: `${valuationBase}/frameworks/${m.slug}`,

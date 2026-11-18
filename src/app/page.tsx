@@ -74,7 +74,7 @@ function Philosophy() {
             Personal Philosophy
           </p>
           <blockquote className="mt-8 font-serif text-4xl leading-tight text-ivory italic sm:text-6xl">
-            “Professional in Finance,
+            “Discipline in Finance,
             <br className="hidden sm:block" /> Endurance in Life.”
           </blockquote>
           <div className="mx-auto mt-10 h-px w-16 bg-brass-light/60" aria-hidden />

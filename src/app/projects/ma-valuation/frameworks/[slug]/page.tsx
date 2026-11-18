@@ -21,5 +21,5 @@ export default async function FrameworkPage({ params }: Params) {
   const { slug } = await params;
   const method = frameworks.find((f) => f.slug === slug);
   if (!method) notFound();
-  return <MethodPageView method={method} groupLabel="Valuation Frameworks" siblings={frameworks} />;
+  return <MethodPageView method={method} groupLabel="Valuation Methods" siblings={frameworks} />;
 }

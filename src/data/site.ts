@@ -10,7 +10,7 @@ export const site = {
     "Financial project portfolio of Yao, MS in Financial Analytics candidate at Santa Clara University. FP&A, strategic finance, financial modeling, and financial analytics.",
   intro:
     "Hi, welcome to my financial project portfolio. I am Yao, an MS in Financial Analytics candidate at Santa Clara University.",
-  philosophy: "Professional in Finance, Endurance in Life.",
+  philosophy: "Discipline in Finance, Endurance in Life.",
   program: "MS in Financial Analytics",
   school: "Santa Clara University",
 };

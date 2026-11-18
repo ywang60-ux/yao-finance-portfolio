@@ -55,7 +55,7 @@ export default function MAValuationPage() {
         />
       </Block>
 
-      <Block title="2. Frameworks" id="frameworks">
+      <Block title="2. Valuation Frameworks" id="frameworks">
         <p className="mb-6 max-w-3xl text-stone-600">
           Three consistent ways to value a business. Each treats the benefit of debt financing differently.
         </p>

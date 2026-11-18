@@ -326,6 +326,10 @@ export const caseStudies: {
 
 export const valuationNav = [
   {
+    label: "Acquisition Framework",
+    items: [{ label: "Structure, Tax & Valuation", href: `${valuationBase}/acquisition-framework` }],
+  },
+  {
     label: "Frameworks",
     items: frameworks.map((m) => ({
       label: `${m.title} (${m.short})`,

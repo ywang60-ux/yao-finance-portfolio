@@ -6,7 +6,8 @@ import { valuationBase, valuationNav } from "@/data/valuation";
 
 /** Sidebar listing every page in the M&A Valuation project. */
 export default function ValuationNav() {
-  const pathname = usePathname();
+  // The GitHub Pages export uses trailing slashes (/page/); Vercel does not (/page).
+  const pathname = usePathname().replace(/(.)\/$/, "$1");
   const linkClass = (active: boolean) =>
     `-ml-px block border-l py-1 pl-4 text-sm transition-colors ${
       active

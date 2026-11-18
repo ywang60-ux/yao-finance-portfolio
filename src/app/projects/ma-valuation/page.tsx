@@ -11,6 +11,7 @@ import {
   frameworks,
   methodHref,
   terminalValueMethods,
+  valuationBase,
 } from "@/data/valuation";
 
 const project = getProject("ma-valuation")!;
@@ -41,7 +42,20 @@ export default function MAValuationPage() {
         </>
       }
     >
-      <Block title="1. Frameworks" id="frameworks">
+      <Block title="1. Acquisition Framework" id="acquisition-framework">
+        <p className="mb-6 max-w-3xl text-stone-600">
+          How the deal is structured (assets or stock, direct or through a subsidiary) and why that choice changes taxes,
+          liabilities, and value.
+        </p>
+        <MethodCard
+          href={`${valuationBase}/acquisition-framework`}
+          kicker="Deal Structure"
+          title="Acquisition Framework"
+          text="Acquisition methods, deal structures, tax treatment (§368, §338), and valuation implications."
+        />
+      </Block>
+
+      <Block title="2. Frameworks" id="frameworks">
         <p className="mb-6 max-w-3xl text-stone-600">
           Three consistent ways to value a business. Each treats the benefit of debt financing differently.
         </p>
@@ -52,7 +66,7 @@ export default function MAValuationPage() {
         </div>
       </Block>
 
-      <Block title="2. Terminal Value" id="terminal-value">
+      <Block title="3. Terminal Value" id="terminal-value">
         <p className="mb-6 max-w-3xl text-stone-600">
           Ways to value cash flows beyond the explicit forecast period, which often make up most of enterprise value.
         </p>
@@ -63,7 +77,7 @@ export default function MAValuationPage() {
         </div>
       </Block>
 
-      <Block title="3. Case Studies" id="case-studies">
+      <Block title="4. Case Studies" id="case-studies">
         <div className="grid gap-4">
           {caseStudies.map((c) => (
             <Link
